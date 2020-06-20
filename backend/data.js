@@ -33,7 +33,7 @@ export default {
         price: 90,
         rating: 4.8,
         numReviews: 3,
-        countInStock: 0,
+        countInStock: 10,
 
     }
 ]
