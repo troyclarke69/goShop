@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, dispatch, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { detailsProduct } from '../actions/productActions';
+import CurrencyFormat from 'react-currency-format'; //ES6
 
-function ProductScreen (props) {
-    // console.log(props.match.params.id);
-    // const product = data.products.find(x => x._id === props.match.params.id)
-    const [qty, setQty] = useState(1);
-    const productDetails = useSelector(state => state.productDetails);
-    const { product, loading, error } = productDetails;
-    const dispatch = useDispatch();
+function ProductScreen(props) {
+  const [qty, setQty] = useState(1);
+  const productDetails = useSelector(state => state.productDetails);
+  const { product, loading, error } = productDetails;
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(detailsProduct(props.match.params.id));
-        return () => {
-          //
-        };
-      }, [])
+  useEffect(() => {
+    dispatch(detailsProduct(props.match.params.id));
+    return () => {
+      //
+    };
+  }, []);
 
-    const handleAddToCart = () => {
-        console.log(qty);
-        props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
-    }
+  const handleAddToCart = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+  }
 
-    return <div>
+  return <div>
     <div className="back-to-result">
       <Link to="/">Back to result</Link>
     </div>
@@ -43,7 +41,10 @@ function ProductScreen (props) {
                   {product.rating} Stars ({product.numReviews} Reviews)
                 </li>
                 <li>
-                  Price: <b>${product.price}</b>
+                  Price: 
+                  {/* <b>${product.price}</b> */}
+                  <b><CurrencyFormat value={product.price} decimalScale={2} fixedDecimalScale={true}
+                  displayType={'text'} thousandSeparator={true} prefix={'$'} /></b>
                 </li>
                 <li>
                   Description:
@@ -56,7 +57,10 @@ function ProductScreen (props) {
             <div className="details-action">
               <ul>
                 <li>
-                  Price: {product.price}
+                  Price: 
+                    {/* {product.price} */}
+                    <b><CurrencyFormat value={product.price} decimalScale={2} fixedDecimalScale={true}
+                  displayType={'text'} thousandSeparator={true} prefix={'$'} /></b>
                 </li>
                 <li>
                   Status: {product.countInStock > 0 ? "In Stock" : "Unavailable."}
@@ -77,7 +81,8 @@ function ProductScreen (props) {
           </div>
         )
     }
+
+
   </div>
 }
-
 export default ProductScreen;

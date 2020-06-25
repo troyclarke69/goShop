@@ -7,14 +7,6 @@ import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
 import orderRoute from './routes/orderRoute';
 
-// const express = require('express');
-// const path = require('path');
-// const mongoose = require('mongoose');
-// const config = require('./config');
-// const userRoute = require('./routes/userRoute');
-// const productRoute = require('./routes/productRoute');
-// const orderRoute = require('./routes/orderRoute');
-
 const mongodbUrl = config.MONGODB_URL;
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,

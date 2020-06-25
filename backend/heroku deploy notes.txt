@@ -1,0 +1,50 @@
+Installs:
+git
+heroku-cli
+
+SAMPLE SITE CREATED:
+https://arcane-inlet-09068.herokuapp.com/
+
+cmd:
+heroku login (launches browser - login)
+
+TO SET UP SAMPLE APP:
+git clone https://github.com/heroku/node-js-getting-started.git
+cd node node-js-getting-started
+
+TO SET UP OWN APP (on heroku):
+heroku create <you can pass a parameter to specify your own app name>
+
+git push heroku master
+
+--to ensure app instance is running:
+heroku ps:scale web=1
+
+heroku open
+
+heroku logs --tail
+
+A Procfile in the example app you deployed looks like this: web: node index.js
+
+RUN LOCALLY:
+(npm install ... if necessary)
+
+heroku local web
+Open http://localhost:5000
+
+DEPLOY:
+git add .
+git commit -m "comment"
+git push heroku master (push to heroku)
+heroku open <path>
+
+heroku addons
+ex.
+heroku addons: create papertrail
+heroku addons: open papertrail
+
+PROVISION A DATABASE:
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#provision-a-database
+
+
+

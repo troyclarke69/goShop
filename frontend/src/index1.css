@@ -1,11 +1,14 @@
 html{
-    font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
-    box-sizing: border-box;
+  font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
+  box-sizing: border-box;
 }
 body{
-  font: 1.6rem Gotu, Helvetica;
+  font: 1.6rem "Gotu", Helvetica;
   height: 100vh;
   margin: 0;
+}
+#root {
+  height: 100%;
 }
 button{
   font-size: 1.6rem;
@@ -33,15 +36,13 @@ button{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  font-weight: bold;
+  padding: 0.5rem;
 }
 .brand a{
-  color: #d8d8d8;
-  font-size: 2.8rem;
+  color: #ffffff;
+  font-size: 3rem;
   font-weight: bold;
   text-decoration: none;
-  padding-left: 1rem;
 }
 .header-links a{
   color:#ffffff;
@@ -112,8 +113,8 @@ a:hover{
 /* Sidebar */
 
 .brand button {
-  font-size: 2rem;
-  padding: 1rem;
+  font-size: 3rem;
+  padding: .5rem;
   background: none;
   border: none;
   color:#ffffff;
@@ -124,11 +125,15 @@ a:hover{
   transition: all .5s;
   transform: translateX(-30rem);
   width: 30rem;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   height: 100%;
 }
 .sidebar.open{
   transform: translateX(0);
+}
+.sidebar li {
+  list-style-type: none;
+  margin: .5rem;
 }
 
 .sidebar-close-button{
@@ -188,16 +193,12 @@ a:hover{
   flex-direction: column;
 }
 .button{
-  /* padding: 1rem;
-  border: .1rem #808080 solid;
-  border-radius: 0.5rem;
-  cursor: pointer; */
   padding: .5rem;
   /* padding-left: 1rem; */
   border: .1rem #c0c0c0 solid;
   border-radius: 0.5rem;
   cursor: pointer;
-  background-color: #808080;
+  background-color: #202020;
   color: #fff;
   font-weight: bold;
 }
@@ -214,6 +215,7 @@ a:hover{
   text-align: center;
 }
 /* Cart */
+
 .cart{
   display: flex;
   flex-wrap: wrap;
@@ -228,6 +230,7 @@ a:hover{
   background-color: #f0f0f0; 
   border-radius: .5rem;
   padding: 1rem;
+  /* position: relative; */
   height: 100%;
 }
 .cart-list-container {
@@ -258,11 +261,11 @@ align-items: flex-end;
 }
 .cart-name{
   flex: 8 1;
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 .cart-delete {
-  flex: 1 1;
+  flex: 8 1;
 }
 .cart-price{
   flex: 1 1;
@@ -330,7 +333,7 @@ tbody>tr:nth-child(odd){
   justify-content: space-between;
   width: 40rem;
   margin: 1rem auto;
-  
+ 
 }
 .checkout-steps > div{
   border-top: .3rem #c0c0c0 solid;
@@ -437,17 +440,14 @@ tbody>tr:nth-child(odd){
 .filter input,
 .filter button,
 .filter select{
-  padding: .5rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   border:.1rem #c0c0c0 solid;
   font-size: 1.6rem;
 
 }
-.category {
-  display: flex;
-  padding: 3rem;
-}
 .categories{
+
   padding: 0;
   list-style-type: none;
 }
