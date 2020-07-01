@@ -6,14 +6,7 @@ import config from './config';
 import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
 import orderRoute from './routes/orderRoute';
-
-// const express = require('express');
-// const path = require('path');
-// const mongoose = require('mongoose');
-// const config = require('./config');
-// const userRoute = require('./routes/userRoute');
-// const productRoute = require('./routes/productRoute');
-// const orderRoute = require('./routes/orderRoute');
+import uploadRoute from './routes/uploadRoute';
 
 const mongodbUrl = config.MONGODB_URL;
 mongoose.connect(mongodbUrl, {
@@ -29,12 +22,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded( {extended: true} ));
 
+app.use('/api/uploads', uploadRoute);
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
 app.use('/api/orders', orderRoute);
 app.get('/api/config/paypal', (req, res) => {
   res.send(config.PAYPAL_CLIENT_ID);
 });
+
+app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 
 app.use(express.static(path.join(__dirname, '/../frontend/build')));
 app.get('*', (req, res) => {

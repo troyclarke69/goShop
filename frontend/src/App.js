@@ -20,6 +20,19 @@ function App() {
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
 
+  // const [searchKeyword, setSearchKeyword] = useState('');
+  // const [sortOrder, setSortOrder] = useState('');
+  // const category = props.match.params.id ? props.match.params.id : '';
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(listProducts(category, searchKeyword, sortOrder))
+  // }
+  // const sortHandler = (e) => {
+  //   setSortOrder(e.target.value);
+  //   dispatch(listProducts(category, searchKeyword, sortOrder))
+  // }
+
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
   }
@@ -30,22 +43,44 @@ function App() {
     <BrowserRouter>
       <div className="grid-container">
         <header className="header">
+         
           <div className="brand">
             <button onClick={openMenu}>&#9776;</button>
-            <Link to="/" >goShop</Link>
+            <Link to="/"><b>WikiShop</b></Link>
           </div>
+
+          {/* <ul className="filter">
+            <li>
+              <form onSubmit={submitHandler}>
+                <input className="button-search" name="searchKeyword" onChange={(e) => setSearchKeyword(e.target.value)} />
+                <button type="submit">Search</button>
+              </form>
+            </li>
+            <li>
+              Sort By: {' '}
+              <select name="sortOrder" onChange={sortHandler}>
+                <option value="">Newest</option>
+                <option value="lowest">Lowest</option>
+                <option value="highest">Highest</option>
+              </select>
+            </li>
+          </ul> */}
+
+          
           <div className="header-links">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart" title="Your Cart"><i className="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></Link>
             {
-              userInfo ? <Link to="/profile">{userInfo.name}</Link> :
-                <Link to="/signin">Sign In</Link>
+              userInfo ? <Link to="/profile" title={userInfo.name}><i className="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> </Link> :
+                <Link to="/signin" title="Login"><i className="fa fa-sign-in fa-2x" aria-hidden="true"></i></Link>
             }
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
-                <a href="#">Admin</a>
+                <a href="#" title="Admin"><i className="fa fa-unlock fa-2x" aria-hidden="true"></i></a>
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orders">Orders</Link>
+                  </li>
+                  <li>  
                     <Link to="/products">Products</Link>
                   </li>
                 </ul>
@@ -55,20 +90,19 @@ function App() {
         </header>
         <aside className="sidebar">
           <h3>Guitar Categories</h3>
-          <button className="sidebar-close-button" onClick={closeMenu}>x</button>
+          <button className="sidebar-close-button" onClick={closeMenu}>
+            <i className="fa fa-arrow-left fa-1g" aria-hidden="true"></i>
+          </button>
           <ul className="categories">
             <li>
               <Link to="/category/Electric" onClick={closeMenu}>Electric</Link>
             </li>
-
             <li>
               <Link to="/category/Acoustic" onClick={closeMenu}>Acoustic</Link>
             </li>
-
             <li>
               <Link to="/category/Bass" onClick={closeMenu}>Bass</Link>
             </li>
-
           </ul>
         </aside>
         <main className="main">
@@ -82,8 +116,7 @@ function App() {
             <Route path="/placeorder" component={PlaceOrderScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
-            <Route path="/product/:id" component={ProductScreen} />
-            
+            <Route path="/product/:id" component={ProductScreen} />           
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/category/:id" component={HomeScreen} />
             <Route path="/" exact={true} component={HomeScreen} />

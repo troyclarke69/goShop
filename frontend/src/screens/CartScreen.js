@@ -5,17 +5,16 @@ import { Link } from 'react-router-dom';
 import CurrencyFormat from 'react-currency-format'; //ES6
 
 function CartScreen(props) {
-
   const cart = useSelector(state => state.cart);
-
   const { cartItems } = cart;
-
   const productId = props.match.params.id;
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
   const dispatch = useDispatch();
+
   const removeFromCartHandler = (productId) => {
     dispatch(removeFromCart(productId));
   }
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -30,18 +29,13 @@ function CartScreen(props) {
     <div className="cart-list">
       <ul className="cart-list-container">
         <li>
-          <h3>
-            Your Cart
-          </h3>
-          <div>
-            Price
-          </div>
+          <h3>Your Cart</h3>
+          <div>Price</div>
         </li>
         {
           cartItems.length === 0 ?
-            <div>
-              Cart is empty
-          </div>
+            <div>Your Cart is empty. <Link to="/"> Go Shopping.</Link></div>
+            
             :
             cartItems.map(item =>
               <li key={item._id}>
@@ -55,42 +49,37 @@ function CartScreen(props) {
                     </Link>
                   </div>
                   <div>
-                    Qty:
-                  <select value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
+                    Qty:{' '}
+                    <select className="qty-select" value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
                       {[...Array(item.countInStock).keys()].map(x =>
                         <option key={x + 1} value={x + 1}>{x + 1}</option>
                       )}
                     </select>
-                    {' '}
-                    <button type="button" className="button cart-delete" onClick={() => removeFromCartHandler(item.product)} >
-                      Delete
-                    </button>
+                    {' '}{' '}
+                    <button type="button" className="" onClick={() => removeFromCartHandler(item.product)} title="Remove this item from cart"><i class="fa fa-trash fa-1g" aria-hidden="true"></i></button>
                   </div>
                 </div>
                 <div className="cart-price">
                   {/* ${item.price} */}
-                  <CurrencyFormat value={item.price} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-                  
+                  <CurrencyFormat value={item.price} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />                 
                 </div>
               </li>
             )
         }
       </ul>
-
     </div>
     <div className="cart-action">
       <h3>
-        Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items)
-        : {' '}
-         {/* $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)} */}
+        Subtotal: {' '}
          <CurrencyFormat value={cartItems.reduce((a, c) => a + c.price * c.qty, 0)} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
       </h3>
-      <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
+      <h4>Items: {cartItems.reduce((a, c) => a + c.qty, 0)}</h4>
+
+      <button onClick={checkoutHandler} className="button primary full-width" 
+          disabled={cartItems.length === 0}>
         Proceed to Checkout
       </button>
-
     </div>
-
   </div>
 }
 

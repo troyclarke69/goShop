@@ -36,7 +36,9 @@ function RegisterScreen(props) {
           <h2>Create Account</h2>
         </li>
         <li>
-          {loading && <div>Loading...</div>}
+          {loading && <div><i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span className="sr-only">Loading...</span>
+          </div>}
           {error && <div>{error}</div>}
         </li>
         <li>
@@ -68,7 +70,7 @@ function RegisterScreen(props) {
         </li>
         <li>
           Already have an account?
-          <Link to={redirect === "/" ? "signin" : "signin?redirect=" + redirect} className="button secondary text-center" >Create your goShop account</Link>
+          <Link to={redirect === "/" ? "signin" : "signin?redirect=" + redirect} className="button secondary text-center" >Login</Link>
 
         </li>
 

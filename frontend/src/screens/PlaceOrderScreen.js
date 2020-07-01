@@ -75,7 +75,7 @@ function PlaceOrderScreen(props) {
           <ul className="cart-list-container">
             <li>
               <h3>
-                Shopping Cart
+                Your Cart
           </h3>
               <div>
                 Price
@@ -85,7 +85,7 @@ function PlaceOrderScreen(props) {
               cartItems.length === 0 ?
                 <div>
                   Cart is empty
-          </div>
+                </div>
                 :
                 cartItems.map(item =>
                   <li key={item._id}>

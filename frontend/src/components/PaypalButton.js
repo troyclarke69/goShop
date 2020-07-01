@@ -43,7 +43,10 @@ function PaypalButton(props) {
   }, []);
 
   if (!sdkReady) {
-    return <div>Loading...</div>
+    // return <div><i class="fa-li fa fa-spinner fa-spin"></i>Loading...</div>
+    return <div><i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+      <span className="sr-only">Loading...</span>
+    </div> 
   }
 
   const Button = window.paypal.Buttons.driver('react', { React, ReactDOM });

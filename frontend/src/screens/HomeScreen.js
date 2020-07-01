@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import CurrencyFormat from 'react-currency-format'; //ES6
+import Rating from '../components/Rating';
 
 function HomeScreen(props) {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -26,6 +27,7 @@ function HomeScreen(props) {
   }
   const sortHandler = (e) => {
     setSortOrder(e.target.value);
+    // console.log(e.target.value);
     dispatch(listProducts(category, searchKeyword, sortOrder))
   }
 
@@ -33,19 +35,18 @@ function HomeScreen(props) {
     {category &&
       <div className="category">
         <div>Category: {category}</div> 
-        {/* <div><Link to="/">Refresh</Link></div>       */}
       </div>
     }
 
     <ul className="filter">
       <li>
         <form onSubmit={submitHandler}>
-          <input name="searchKeyword" onChange={(e) => setSearchKeyword(e.target.value)} />
+          <input className="button-search" name="searchKeyword" onChange={(e) => setSearchKeyword(e.target.value)} />
           <button type="submit">Search</button>
         </form>
       </li>
       <li>
-        Sort By {' '}
+        Sort By: {' '}
         <select name="sortOrder" onChange={sortHandler}>
           <option value="">Newest</option>
           <option value="lowest">Lowest</option>
@@ -53,8 +54,11 @@ function HomeScreen(props) {
         </select>
       </li>
     </ul>
-    {loading ? <div>Loading...</div> :
-      error ? <div>{error}</div> :
+    
+    {loading ? <div><i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+          <span className="sr-only">Loading...</span>
+        </div> :
+        error ? <div>{error}</div> :
         <ul className="products">
           {
             products.map(product =>
@@ -71,7 +75,13 @@ function HomeScreen(props) {
                   {/* <div className="product-price">${product.price}</div> */}
                   <div className="product-price"><CurrencyFormat value={product.price} decimalScale={2}     fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                   </div>
-                  <div className="product-rating">{product.rating} Stars ({product.numReiews} Reviews)</div>
+                  <div className="product-rating">
+                    {/* {product.rating} Stars ({product.numReviews} Reviews) */}
+                    <Rating
+                      value={product.rating}
+                      text={product.numReviews + ' reviews'}
+                    />
+                  </div>
                 </div>
               </li>)
           }

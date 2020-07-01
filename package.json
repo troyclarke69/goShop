@@ -5,17 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch backend --exec babel-node backend/server.js",
-    "build": "babel backend -d dist",
+    "build": "rmdir /s dist && babel backend -d dist",
     "heroku-postbuild": "npm run build && cd frontend && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.708.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.19"
+    "mongoose": "^5.9.19",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

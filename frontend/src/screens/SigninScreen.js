@@ -10,7 +10,13 @@ function SigninScreen(props) {
   const userSignin = useSelector(state => state.userSignin);
   const { loading, userInfo, error } = userSignin;
   const dispatch = useDispatch();
+
   const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
+  // above does not capture anchor # ... and below doesn't work ...
+  // const anchor = props.location.search ? props.location.search.split("#")[1]: '';
+  // console.log(props.location.search);
+  // console.log(props.location.Link);
+  
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
@@ -29,10 +35,12 @@ function SigninScreen(props) {
     <form onSubmit={submitHandler} >
       <ul className="form-container">
         <li>
-          <h2>Sign-In</h2>
+          <h2>Login</h2>
         </li>
         <li>
-          {loading && <div>Loading...</div>}
+          {loading && <div><i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span className="sr-only">Loading...</span>
+          </div>}
           {error && <div>{error}</div>}
         </li>
         <li>
@@ -48,13 +56,13 @@ function SigninScreen(props) {
           </input>
         </li>
         <li>
-          <button type="submit" className="button primary">Signin</button>
+          <button type="submit" className="button primary">Login</button>
         </li>
         <li>
-          New to goShop?
+          New Customer?
         </li>
         <li>
-          <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary text-center" >Create your goShop account</Link>
+          <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary text-center" >Create your wikishop account</Link>
         </li>
       </ul>
     </form>

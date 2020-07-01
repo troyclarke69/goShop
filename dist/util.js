@@ -53,7 +53,7 @@ const isAuth = (req, res, next) => {
 exports.isAuth = isAuth;
 
 const isAdmin = (req, res, next) => {
-  console.log(req.user);
+  // console.log(req.user);
 
   if (req.user && req.user.isAdmin) {
     return next();

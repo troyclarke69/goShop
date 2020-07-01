@@ -2,18 +2,26 @@ Installs:
 git
 heroku-cli
 
+TO SET UP SAMPLE APP:
+git clone https://github.com/heroku/node-js-getting-started.git
+cd node node-js-getting-started
 SAMPLE SITE CREATED:
 https://arcane-inlet-09068.herokuapp.com/
+
+PROJECT MUST BE A GIT !!!
+git init
 
 cmd:
 heroku login (launches browser - login)
 
-TO SET UP SAMPLE APP:
-git clone https://github.com/heroku/node-js-getting-started.git
-cd node node-js-getting-started
-
 TO SET UP OWN APP (on heroku):
 heroku create <you can pass a parameter to specify your own app name>
+
+OR log in and create NEW on heroku.com - in new app - go to Deploy menu
+
+
+
+heroku git:remote -a troyclarke-blog
 
 git push heroku master
 
@@ -46,5 +54,32 @@ heroku addons: open papertrail
 PROVISION A DATABASE:
 https://devcenter.heroku.com/articles/getting-started-with-nodejs#provision-a-database
 
+
+**** DEPLOY NOTES FROM HEROKU ******
+
+Install the Heroku CLI
+Download and install the Heroku CLI.
+
+If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
+
+$ heroku login
+Create a new Git repository
+Initialize a git repository in a new or existing directory
+
+$ cd my-project/
+$ git init
+$ heroku git:remote -a troyclarke-blog
+Deploy your application
+Commit your code to the repository and deploy it to Heroku using Git.
+
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+Existing Git repository
+For existing repositories, simply add the heroku remote
+
+$ heroku git:remote -a troyclarke-blog
+
+touch Procfile
 
 

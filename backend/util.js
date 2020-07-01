@@ -11,7 +11,7 @@ const getToken = (user) => {
     isAdmin: user.isAdmin,
 
   }, config.JWT_SECRET, {
-    expiresIn: '1m'
+    expiresIn: '1h'
   })
 }
 
@@ -34,7 +34,7 @@ const isAuth = (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-  console.log(req.user)
+  // console.log(req.user)
   if (req.user && req.user.isAdmin) {
     return next();
   }
